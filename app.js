@@ -4,6 +4,12 @@ require('dotenv').config({ path: './config/config.env' })
 
 // Initialize database
 const db = require('./config/db')
+const itemModel = require('./api/models/Item')
+const orderModel = require('./api/models/Order')
+
+// Each item belongs to one or more order, each order belongs to exactly one item
+itemModel.hasMany(orderModel)
+orderModel.belongsTo(itemModel)
 
 const app = express()
 
