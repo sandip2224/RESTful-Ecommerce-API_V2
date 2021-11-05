@@ -15,5 +15,11 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "sequelize": "^6.9.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "jest-stare": "^2.3.0",
+    "nodemon": "^2.0.14",
+    "supertest": "^6.1.6"
   }
 }
