@@ -5,6 +5,8 @@ require('dotenv').config({ path: './config/config.env' })
 // Initialize database
 const db = require('./config/db')
 
+const itemModel = require('./api/models/Item')
+
 const app = express()
 
 app.use(express.json())
