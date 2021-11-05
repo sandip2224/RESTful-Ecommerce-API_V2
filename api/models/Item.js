@@ -4,7 +4,8 @@ const db = require('../../config/db')
 const Item = db.define('item', {
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     price: {
         type: Sequelize.STRING,
