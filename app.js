@@ -1,5 +1,8 @@
 const express = require('express')
 const colors = require('colors')
+const helmet = require('helmet')
+const cors = require('cors')
+const morgan = require('morgan')
 require('dotenv').config({ path: './config/config.env' })
 
 // Initialize database
@@ -18,8 +21,14 @@ orderModel.belongsTo(userModel)
 
 const app = express()
 
+if (process.env.NODE_ENV === 'test') {
+    app.use(morgan('dev'))
+}
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(cors())
+app.use(helmet())
 
 app.use('/api/v1/items', require('./api/routes/itemRoute'))
 app.use('/api/v1/orders', require('./api/routes/orderRoute'))
