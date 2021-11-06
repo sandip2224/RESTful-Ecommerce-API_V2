@@ -97,4 +97,24 @@ router.post('/login', async (req, res) => {
     }
 })
 
+router.delete('/:userId', async (req, res) => {
+    try {
+        const response = await userModel.destroy({
+            where: {
+                id: req.params.userId
+            }
+        })
+        res.status(200).json({
+            message: 'User deleted sucessfully!!',
+            response
+        })
+    }
+    catch (err) {
+        res.status(500).json({
+            message: 'Unexpected error occurred!!',
+            error: err
+        })
+    }
+})
+
 module.exports = router
