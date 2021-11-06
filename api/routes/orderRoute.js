@@ -5,9 +5,19 @@ const itemModel = require('../models/Item')
 const orderModel = require('../models/Order')
 const userModel = require('../models/User')
 
+const checkAuth = require('../middleware/checkAuth')
+
+const {
+    isAdmin,
+    isSeller,
+    isCustomer,
+    isAdminOrSeller,
+} = require('../middleware/checkRoles')
+
+
 // Payload: userId
 
-router.get('/', async (req, res) => {
+router.get('/', checkAuth, isCustomer, async (req, res) => {
     try {
         const orders = await orderModel.findAll({
             include: [{ all: true }],
@@ -27,7 +37,7 @@ router.get('/', async (req, res) => {
 
 // Payload: userId
 
-router.get('/:orderId', async (req, res) => {
+router.get('/:orderId', checkAuth, isCustomer, async (req, res) => {
     try {
         const order = await orderModel.findAll({
             include: [{ all: true }],
@@ -48,7 +58,7 @@ router.get('/:orderId', async (req, res) => {
 
 // Payload: itemId, userId, quantity
 
-router.post('/', async (req, res) => {
+router.post('/', checkAuth, isCustomer, async (req, res) => {
     if (req.body.hasOwnProperty('paymentStatus')) {
         return res.status(200).json({
             message: 'Payment status cannot be passed as an argument!!'
@@ -112,7 +122,7 @@ router.post('/', async (req, res) => {
 
 // Payload: userId
 
-router.delete('/:orderId', async (req, res) => {
+router.delete('/:orderId', checkAuth, isCustomer, async (req, res) => {
     try {
         const response = await orderModel.destroy({
             where: {
