@@ -86,40 +86,6 @@ router.post('/', checkAuth, isCustomer, async (req, res) => {
     }
 })
 
-// router.patch('/:orderId', async (req, res) => {
-//     try {
-//         if (req.body.hasOwnProperty('itemId')) {
-//             const item = await itemModel.findAll({
-//                 where: {
-//                     itemId: req.body.itemId,
-//                     userId: req.body.userId
-//                 }
-//             })
-//             if (item.length === 0) {
-//                 return res.status(404).json({
-//                     message: 'Item not found. Please retry with a valid item id or !!'
-//                 })
-//             }
-//         }
-//         // Item exists
-//         const response = await orderModel.update(
-//             req.body,
-//             {
-//                 where: { id: req.params.orderId }
-//             })
-//         res.json({
-//             message: 'Order updated successfully!!',
-//             response
-//         })
-//     }
-//     catch (err) {
-//         res.status(500).json({
-//             message: 'Unexpected error occurred!!',
-//             error: err
-//         })
-//     }
-// })
-
 // Payload: userId
 
 router.delete('/:orderId', checkAuth, isCustomer, async (req, res) => {
