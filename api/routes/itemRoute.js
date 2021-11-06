@@ -3,6 +3,10 @@ const router = express.Router()
 
 const itemModel = require('../models/Item')
 
+const checkAuth = require('../middleware/checkAuth')
+const { isAdmin, isAdminOrSeller } = require('../middleware/checkRoles')
+
+
 router.get('/', async (req, res) => {
     try {
         const items = await itemModel.findAll()
@@ -33,7 +37,7 @@ router.get('/:itemId', async (req, res) => {
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/', checkAuth, isAdminOrSeller, async (req, res) => {
     try {
         const newItem = await itemModel.create(req.body)
         res.status(200).json(newItem)
@@ -46,7 +50,7 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.patch('/:itemId', async (req, res) => {
+router.patch('/:itemId', checkAuth, isAdminOrSeller, async (req, res) => {
     try {
         const response = await itemModel.update(
             req.body,
@@ -66,7 +70,7 @@ router.patch('/:itemId', async (req, res) => {
     }
 })
 
-router.delete('/:itemId', async (req, res) => {
+router.delete('/:itemId', checkAuth, isAdminOrSeller, async (req, res) => {
     try {
         const response = await itemModel.destroy({
             where: {
@@ -86,7 +90,7 @@ router.delete('/:itemId', async (req, res) => {
     }
 })
 
-router.delete('/', async (req, res) => {
+router.delete('/', checkAuth, isAdmin, async (req, res) => {
     try {
         const response = await itemModel.destroy({
             where: {}
