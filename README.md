@@ -21,7 +21,7 @@ CREATE DATABASE ecommercedb;
 #### Fork and clone this repository using
 
    ```bash
-   git clone https://github.com/sandip2224/RESTful-Ecommerce-API-Version_2.git
+   git clone https://github.com/sandip2224/RESTful-Ecommerce-API_V2.git
    ```   
 #### Install dependencies and dev dependency using
 
