@@ -7,6 +7,7 @@ const db = require('./config/db')
 const itemModel = require('./api/models/Item')
 const orderModel = require('./api/models/Order')
 const userModel = require('./api/models/User')
+const paymentModel = require('./api/models/Payment')
 
 // Each item belongs to one or more order, each order belongs to exactly one item
 itemModel.hasMany(orderModel)
@@ -15,6 +16,10 @@ orderModel.belongsTo(itemModel)
 // Each user is associated with one or more orders, each order belongs to one user
 userModel.hasMany(orderModel)
 orderModel.belongsTo(userModel)
+
+// Each payment is associated with exactly one order and vice versa
+paymentModel.hasOne(paymentModel)
+orderModel.belongsTo(paymentModel)
 
 const app = express()
 

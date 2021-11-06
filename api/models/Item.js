@@ -14,7 +14,7 @@ const Item = db.define('item', {
 })
 
 Item.sync()
-    .then(console.log('[SUCCESS] Item Table has been created!!'.green.underline))
-    .catch(err => console.log('[FAILED] Post Table creation failed!!'.red.underline))
+    .then(console.log('> [SUCCESS] Item Table has been created!!'.green.underline))
+    .catch(err => console.log('> [FAILED] Post Table creation failed!!'.red.underline))
 
 module.exports = Item

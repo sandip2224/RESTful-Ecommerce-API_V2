@@ -3,7 +3,7 @@ const db = require('../../config/db')
 
 const Payment = db.define('payment', {
     orderId: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     address: {
@@ -11,7 +11,7 @@ const Payment = db.define('payment', {
         allowNull: false
     },
     pin: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false
     },
     cardNumber: {
@@ -24,7 +24,10 @@ const Payment = db.define('payment', {
 })
 
 Payment.sync()
-    .then(console.log('[SUCCESS] Payment Table has been created!!'.green.underline))
-    .catch(err => console.log('[FAILED] Payment Table creation failed!!'.red.underline))
+    .then(console.log('> [SUCCESS] Payment Table has been created!!'.green.underline))
+    .catch(err => {
+        console.log('> [FAILED] Payment Table creation failed!!'.red.underline)
+        console.log(err)
+    })
 
 module.exports = Payment

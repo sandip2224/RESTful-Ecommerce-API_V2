@@ -27,7 +27,7 @@ const User = db.define('user', {
 )
 
 User.sync()
-    .then(console.log('[SUCCESS] User Table has been created!!'.green.underline))
-    .catch(err => console.log('[FAILED] User Table creation failed!!'.red.underline))
+    .then(console.log('> [SUCCESS] User Table has been created!!'.green.underline))
+    .catch(err => console.log('> [FAILED] User Table creation failed!!'.red.underline))
 
 module.exports = User

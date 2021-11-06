@@ -17,9 +17,9 @@ const Order = db.define('order', {
 })
 
 Order.sync()
-    .then(console.log('[SUCCESS] Order Table has been created!!'.green.underline))
+    .then(console.log('> [SUCCESS] Order Table has been created!!'.green.underline))
     .catch(err => {
-        console.log('[FAILED] Order Table creation failed!!'.red.underline)
+        console.log('> [FAILED] Order Table creation failed!!'.red.underline)
         console.log(err)
     })
 
