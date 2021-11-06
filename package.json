@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env NODE_ENV=test jest --reporters default jest-stare --coverage --testTimeout=60000",
     "dev": "cross-env NODE_ENV=test nodemon app",
-    "start": "cross-env NODE_ENV=prod node app "
+    "start": "cross-env NODE_ENV=prod node app"
   },
   "author": "Sandipan Das",
   "license": "ISC",
