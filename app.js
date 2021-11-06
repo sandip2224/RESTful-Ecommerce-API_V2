@@ -6,6 +6,7 @@ require('dotenv').config({ path: './config/config.env' })
 const db = require('./config/db')
 const itemModel = require('./api/models/Item')
 const orderModel = require('./api/models/Order')
+const userModel = require('./api/models/User')
 
 // Each item belongs to one or more order, each order belongs to exactly one item
 itemModel.hasMany(orderModel)
