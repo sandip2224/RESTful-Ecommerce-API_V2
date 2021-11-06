@@ -6,6 +6,10 @@ const Order = db.define('order', {
         type: Sequelize.INTEGER,
         allowNull: false
     },
+    userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
     quantity: {
         type: Sequelize.INTEGER,
         defaultValue: 1

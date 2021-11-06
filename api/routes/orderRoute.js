@@ -3,11 +3,12 @@ const router = express.Router()
 
 const itemModel = require('../models/Item')
 const orderModel = require('../models/Order')
+const userModel = require('../models/User')
 
 router.get('/', async (req, res) => {
     try {
         const orders = await orderModel.findAll({
-            include: itemModel
+            include: [{ all: true }]
         })
         res.status(200).json(orders)
     }
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/:orderId', async (req, res) => {
     try {
         const order = await orderModel.findAll({
-            include: itemModel,
+            include: [{ all: true }],
             where: {
                 id: req.params.orderId
             }
@@ -61,6 +62,11 @@ router.post('/', async (req, res) => {
 })
 
 router.patch('/:orderId', async (req, res) => {
+    if (req.body.hasOwnProperty('userId')) {
+        return res.status(200).json({
+            message: 'User id change is not permitted!!'
+        })
+    }
     try {
         if (req.body.hasOwnProperty('itemId')) {
             const item = await itemModel.findAll({
@@ -97,9 +103,16 @@ router.delete('/:orderId', async (req, res) => {
     try {
         const response = await orderModel.destroy({
             where: {
-                id: req.params.orderId
+                id: req.params.orderId,
+                userId: req.body.userId
             }
         })
+        if (response === 0) {
+            return res.status(404).json({
+                message: 'Order details not found!!',
+                response
+            })
+        }
         res.status(200).json({
             message: 'Order deleted sucessfully!!',
             response

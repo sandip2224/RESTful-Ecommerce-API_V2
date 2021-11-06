@@ -12,6 +12,10 @@ const userModel = require('./api/models/User')
 itemModel.hasMany(orderModel)
 orderModel.belongsTo(itemModel)
 
+// Each user is associated with one or more orders, each order belongs to one user
+userModel.hasMany(orderModel)
+orderModel.belongsTo(userModel)
+
 const app = express()
 
 app.use(express.json())
