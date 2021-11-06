@@ -1,12 +1,20 @@
 <h2 align="center">RESTful Ecommerce API v2 🚀</h2>
 
-> Authentication middlewares haven't been tested yet (but feel free to test it out for yourself)
+> Authentication middlewares haven't been tested yet (but feel free to test it out!!)
 
 ## 🔄 Built with
 
 - NodeJS
 - ExpressJS
 - MySQL
+
+## 🚩 Preliminary Setup
+
+- Assuming MySQL has been installed locally on your system, execute the following command either from MySQL SHELL or from any SQL editor of your choice:
+
+```bash
+CREATE DATABASE ecommercedb;
+```
 
 ## 🚩 How to install API
 
