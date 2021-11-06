@@ -3,6 +3,8 @@ const router = express.Router()
 
 const orderModel = require('../models/Order')
 
+// Payload: userId
+
 router.get('/', async (req, res) => {
     try {
         if (!req.body.hasOwnProperty('userId')) {
@@ -28,6 +30,8 @@ router.get('/', async (req, res) => {
         })
     }
 })
+
+// Payload: orderId, userId, address, pin, cardNumber
 
 router.post('/', async (req, res) => {
     try {

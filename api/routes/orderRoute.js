@@ -5,6 +5,8 @@ const itemModel = require('../models/Item')
 const orderModel = require('../models/Order')
 const userModel = require('../models/User')
 
+// Payload: userId
+
 router.get('/', async (req, res) => {
     try {
         const orders = await orderModel.findAll({
@@ -22,6 +24,8 @@ router.get('/', async (req, res) => {
         })
     }
 })
+
+// Payload: userId
 
 router.get('/:orderId', async (req, res) => {
     try {
@@ -42,7 +46,14 @@ router.get('/:orderId', async (req, res) => {
     }
 })
 
+// Payload: itemId, userId, quantity
+
 router.post('/', async (req, res) => {
+    if (req.body.hasOwnProperty('paymentStatus')) {
+        return res.status(200).json({
+            message: 'Payment status cannot be passed as an argument!!'
+        })
+    }
     try {
         const item = await itemModel.findAll({
             where: {
@@ -98,6 +109,8 @@ router.post('/', async (req, res) => {
 //         })
 //     }
 // })
+
+// Payload: userId
 
 router.delete('/:orderId', async (req, res) => {
     try {

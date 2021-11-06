@@ -35,6 +35,8 @@ router.get('/:userId', async (req, res) => {
     }
 })
 
+// Payload: email, level
+
 router.post('/register', async (req, res) => {
     try {
         const user = await userModel.findAll({
@@ -61,6 +63,8 @@ router.post('/register', async (req, res) => {
     }
 })
 
+// Payload: email
+
 router.post('/login', async (req, res) => {
     try {
         const user = await userModel.findAll({
@@ -77,6 +81,7 @@ router.post('/login', async (req, res) => {
             {
                 email: user.email,
                 level: user.level,
+                userId: user.id
             },
             process.env.JWT_KEY,
             {
@@ -86,7 +91,7 @@ router.post('/login', async (req, res) => {
         return res.status(200).json({
             message: 'Login successful!!',
             userDetails: user[0],
-            token: token,
+            token: token
         })
     }
     catch (err) {
