@@ -18,8 +18,8 @@ userModel.hasMany(orderModel)
 orderModel.belongsTo(userModel)
 
 // Each payment is associated with exactly one order and vice versa
-paymentModel.hasOne(paymentModel)
-orderModel.belongsTo(paymentModel)
+// paymentModel.hasOne(paymentModel)
+// orderModel.belongsTo(paymentModel)
 
 const app = express()
 
