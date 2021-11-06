@@ -2,10 +2,12 @@ const express = require('express')
 const router = express.Router()
 
 const orderModel = require('../models/Order')
+const checkAuth = require('../middleware/checkAuth')
+const { isAdmin, isAdminOrSeller, isCustomer } = require('../middleware/checkRoles')
 
 // Payload: userId
 
-router.get('/', async (req, res) => {
+router.get('/', checkAuth, isCustomer, async (req, res) => {
     try {
         if (!req.body.hasOwnProperty('userId')) {
             return res.status(200).json({
@@ -33,14 +35,9 @@ router.get('/', async (req, res) => {
 
 // Payload: orderId, userId, address, pin, cardNumber
 
-router.post('/', async (req, res) => {
+router.post('/', checkAuth, async (req, res) => {
     try {
-        if (
-            !req.body ||
-            !req.body.address ||
-            !req.body.pin ||
-            !req.body.cardNumber
-        ) {
+        if (!req.body || !req.body.address || !req.body.pin || !req.body.cardNumber) {
             return res.status(404).json({
                 error: 'Required fields are missing!!',
             })

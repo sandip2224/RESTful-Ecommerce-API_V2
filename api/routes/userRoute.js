@@ -4,8 +4,11 @@ const router = express.Router()
 const jwt = require('jsonwebtoken')
 
 const userModel = require('../models/User')
+const checkAuth = require('../middleware/checkAuth')
+const { isAdmin } = require('../middleware/checkRoles')
 
-router.get('/', async (req, res) => {
+
+router.get('/', checkAuth, isAdmin, async (req, res) => {
     try {
         const items = await userModel.findAll()
         res.status(200).json(items)
@@ -102,7 +105,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.delete('/:userId', async (req, res) => {
+router.delete('/:userId', checkAuth, async (req, res) => {
     try {
         const response = await userModel.destroy({
             where: {
